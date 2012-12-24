@@ -86,7 +86,6 @@ public class Player : MonoBehaviour {
 		UpdateRaycasts();
 		
 		thisTransform.position += new Vector3(vel2.x,vel2.y,0f);
-		Debug.Log(vel2.y);
 	}
 	
 	void UpdateRaycasts() {
@@ -112,6 +111,14 @@ public class Player : MonoBehaviour {
 				blockedRight = true;
 				vel2.x = 0f;
 				thisTransform.position = new Vector3(hitInfo.point.x - halfWidth, hitInfo.point.y, 0f);
+			}
+		}
+		// test crossing the midpoint border
+		else if (thisTransform.position.x + halfWidth + absVel2X >= 0) {
+			if(facingDir == facing.Right || movingDir == moving.Right) {
+				blockedRight = true;
+				vel2.x = 0f;
+				thisTransform.position = new Vector3(0 - halfWidth, thisTransform.position.y, 0f);
 			}
 		}
 		
