@@ -31,4 +31,14 @@ public class PlayerOne : Player {
 		UpdateMovement();
 	}
 	
+	protected override void constrainToHalf() {
+		if (thisTransform.position.x + halfWidth + absVel2X >= 0) {
+			if(facingDir == facing.Right || movingDir == moving.Right) {
+				blockedRight = true;
+				vel2.x = 0f;
+				thisTransform.position = new Vector3(0 - halfWidth, thisTransform.position.y, 0f);
+			}
+		}
+	}
+	
 }

@@ -4,6 +4,8 @@ public class Player : MonoBehaviour {
 	
 	protected Transform thisTransform;
 	
+	[HideInInspector] public OTAnimatingSprite playerSprite;
+	
 	[HideInInspector] public enum facing { Right, Left }
 	[HideInInspector] public facing facingDir;
 	
@@ -21,15 +23,15 @@ public class Player : MonoBehaviour {
 	[HideInInspector] public bool blockedDown;
 	
 	private RaycastHit hitInfo;
-	private float halfWidth = 0.6f;
+	protected float halfWidth = 0.6f;
 	protected int borderMask = 1 << 8;
 	
-	private float absVel2X;
-	private float absVel2Y;
+	protected float absVel2X;
+	protected float absVel2Y;
 	
-	private float moveVel = 10f;
-	private Vector3 vel2;
-	private Vector3 vel;
+	protected float moveVel = 10f;
+	protected Vector3 vel2;
+	protected Vector3 vel;
 	
 	public virtual void Awake() {
 		thisTransform = transform;
@@ -81,14 +83,11 @@ public class Player : MonoBehaviour {
 				thisTransform.position = new Vector3(hitInfo.point.x - halfWidth, hitInfo.point.y, 0f);
 			}
 		}
+		
+		constrainToHalf();
+		
 		// test crossing the midpoint border
-		else if (thisTransform.position.x + halfWidth + absVel2X >= 0) {
-			if(facingDir == facing.Right || movingDir == moving.Right) {
-				blockedRight = true;
-				vel2.x = 0f;
-				thisTransform.position = new Vector3(0 - halfWidth, thisTransform.position.y, 0f);
-			}
-		}
+	
 		
 		// blocked on left
 		if(Physics.Raycast(thisTransform.position, -Vector3.right, out hitInfo, halfWidth+absVel2X, borderMask)) {
@@ -105,6 +104,12 @@ public class Player : MonoBehaviour {
 			blockedDown = true;
 			if (vel2.y < 0) { vel2.y = 0f; }
 		}
+	}
+	
+	protected virtual void constrainToHalf() {
+		// each player subclass must implement their own vesion since 
+		// they are constrained to different sections of the field.
+		Debug.Log("Subclasses must implement constraint to half.");
 	}
 	
 }
