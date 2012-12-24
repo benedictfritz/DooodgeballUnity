@@ -22,7 +22,6 @@ public class Player : MonoBehaviour {
 	
 	private RaycastHit hitInfo;
 	private float halfWidth = 0.6f;
-	[HideInInspector] public float rayDistUp = 0.2f;
 	protected int borderMask = 1 << 8;
 	
 	private float absVel2X;
@@ -67,7 +66,7 @@ public class Player : MonoBehaviour {
 		absVel2Y = Mathf.Abs(vel2.y);
 		
 		// blocked up
-		if (Physics.Raycast(thisTransform.position, Vector3.up, out hitInfo, rayDistUp+absVel2Y, borderMask)) {
+		if (Physics.Raycast(thisTransform.position, Vector3.up, out hitInfo, halfWidth+absVel2Y, borderMask)) {
 			// snap against border
 			thisTransform.position = new Vector3(thisTransform.position.x, hitInfo.point.y - halfWidth, 0f);
 			blockedUp = true;
@@ -101,7 +100,7 @@ public class Player : MonoBehaviour {
 		}
 		
 		// blocked down
-		if (Physics.Raycast(thisTransform.position, Vector3.down, out hitInfo, rayDistUp+absVel2Y, borderMask)) {
+		if (Physics.Raycast(thisTransform.position, Vector3.down, out hitInfo, halfWidth+absVel2Y, borderMask)) {
 			thisTransform.position = new Vector3(thisTransform.position.x, hitInfo.point.y + halfWidth, 0f);
 			blockedDown = true;
 			if (vel2.y < 0) { vel2.y = 0f; }
