@@ -142,6 +142,8 @@
      <Compile Include="Assets\Orthello\Standard Assets\OT\_Base\OTSounds.cs" />
      <Compile Include="Assets\Orthello\Standard Assets\OT\_Base\OTTimeCycle.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
+     <Compile Include="Assets\Scripts\PlayerOne.cs" />
+     <Compile Include="Assets\Scripts\PlayerTwo.cs" />
      <None Include="Assets\Orthello\Examples\0 - Simple Examples\TextSprites\lorem.txt" />
      <None Include="Assets\Orthello\Examples\0 - Simple Examples\(Unity Pro) NavMesh Pathfinding\read-me-navmesh.txt" />
      <None Include="Assets\Orthello\Examples\0 - Simple Examples\TextSprites\Atlases\russian.txt" />
