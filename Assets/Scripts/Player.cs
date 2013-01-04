@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 	
-	[HideInInspector] public float speed = 5000;
+	[HideInInspector] public float speed = 5000f;
+	[HideInInspector] public float halfWidth = 0.5f;
 	
 	[HideInInspector] protected string vertKeys;
 	[HideInInspector] protected string horzKeys;
 	
-	void Update () {
+	public virtual void Update () {
 		float vertInput = Input.GetAxisRaw(vertKeys);
 		float horzInput = Input.GetAxisRaw(horzKeys);
 		
