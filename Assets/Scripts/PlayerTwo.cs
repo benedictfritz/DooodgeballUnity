@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class PlayerTwo : Player {
 	
-	void Start() {
+	override public void Start() {
+		base.Start();
+		
 		vertKeys = "VerticalArrows";
 		horzKeys = "HorizontalArrows";
 	}

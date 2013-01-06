@@ -8,6 +8,12 @@ public class Player : MonoBehaviour {
 	[HideInInspector] protected string vertKeys;
 	[HideInInspector] protected string horzKeys;
 	
+	[HideInInspector] protected Vector3 spawnTransform;
+	
+	public virtual void Start() {
+		spawnTransform = transform.position;
+	}
+	
 	public virtual void Update () {
 		float vertInput = Input.GetAxisRaw(vertKeys);
 		float horzInput = Input.GetAxisRaw(horzKeys);
@@ -21,7 +27,8 @@ public class Player : MonoBehaviour {
 	}
 	
 	public void Respawn() {
-		Debug.Log("Respawn!");
+		transform.position = spawnTransform;
+		rigidbody.velocity = Vector3.zero;
 	}
 	
 }

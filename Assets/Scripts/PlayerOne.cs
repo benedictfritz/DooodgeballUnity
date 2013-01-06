@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class PlayerOne : Player {
 	
-	void Start() {
+	override public void Start() {
+		base.Start();
+		
 		vertKeys = "VerticalWASD";
 		horzKeys = "HorizontalWASD";
 	}
