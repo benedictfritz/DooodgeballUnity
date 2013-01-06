@@ -20,4 +20,8 @@ public class Player : MonoBehaviour {
 		}
 	}
 	
+	public void Respawn() {
+		Debug.Log("Respawn!");
+	}
+	
 }
