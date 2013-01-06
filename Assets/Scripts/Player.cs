@@ -26,7 +26,7 @@ public class Player : MonoBehaviour {
 		}
 	}
 	
-	public void Respawn() {
+	public virtual void Respawn() {
 		transform.position = spawnTransform;
 		rigidbody.velocity = Vector3.zero;
 	}

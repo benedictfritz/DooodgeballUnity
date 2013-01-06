@@ -146,6 +146,7 @@
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\PlayerOne.cs" />
      <Compile Include="Assets\Scripts\PlayerTwo.cs" />
+     <Compile Include="Assets\Scripts\ScoreManager.cs" />
      <None Include="Assets\Orthello\Examples\0 - Simple Examples\TextSprites\lorem.txt" />
      <None Include="Assets\SpriteAtlases\balls.xml" />
      <None Include="Assets\Orthello\Examples\0 - Simple Examples\(Unity Pro) NavMesh Pathfinding\read-me-navmesh.txt" />
