@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 	
-	[HideInInspector] public float speed = 5000f;
+	[HideInInspector] public float speed = 10000f;
 	[HideInInspector] public float halfWidth = 0.5f;
 	
 	[HideInInspector] protected string vertKeys;

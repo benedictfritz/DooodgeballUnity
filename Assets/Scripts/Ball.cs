@@ -17,6 +17,8 @@ public class Ball : MonoBehaviour {
 	 */
 	
 	public virtual void Update () {
+		if (GameManager.animating) { rigidbody.velocity = Vector3.zero; }
+		
 		UpdateDeadliness();
 		UpdateSprite();
 	}
