@@ -50,7 +50,7 @@ public class ScoreManager : MonoBehaviour {
 		}
 		else if (player2GameScore >= gamesToWinSet) {
 			if (player2SetScore + 1 == setsToWin) {
-				StartCoroutine(ShowGameOverLoser("player2"));
+				StartCoroutine(ShowGameOverLoser("player1"));
 			}
 			else {
 				StartCoroutine(ShowGameLoser("player1"));
