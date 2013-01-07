@@ -18,9 +18,9 @@ public class PlayerTwo : Player {
 		}
 	}
 	
-	override public void Respawn() {
-		base.Respawn();
-		ScoreManager.IncreaseScore("player1");
+	override public void Die() {
+		base.Die();
+		GameManager.scoreManager.IncreaseScore("player1");
 	}
 	
 }

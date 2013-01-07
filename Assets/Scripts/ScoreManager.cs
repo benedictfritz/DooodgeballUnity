@@ -3,20 +3,54 @@ using System.Collections;
 
 public class ScoreManager : MonoBehaviour {
 	
-	public static int player1Score = 0;
-	public static int player2Score = 0;
+	public int gamesToWinSet;
+	public int setsToWin;
 	
-	public OTTextSprite player1ScoreText;
-	public OTTextSprite player2ScoreText;
+	public static int player1GameScore = 0;
+	public static int player2GameScore = 0;
+	
+	public static int player1SetScore = 0;
+	public static int player2SetScore = 0;
+	
+	public OTTextSprite player1GameScoreText;
+	public OTTextSprite player2GameScoreText;
+	
+	public OTAnimatingSprite loseAnnouncer;
 	
 	public void Update() {
-		player1ScoreText.text = player1Score.ToString();
-		player2ScoreText.text = player2Score.ToString();
 	}
 	
-	public static void IncreaseScore(string player) {
-		if (player.Equals("player1")) { player1Score++; }
-		else if (player.Equals("player2")) { player2Score++; }
+	public void IncreaseScore(string player) {
+		if (player.Equals("player1")) {
+			player1GameScore++;
+			player1GameScoreText.text = player1GameScore.ToString();
+		}
+		else if (player.Equals("player2")) {
+			player2GameScore++;
+			player2GameScoreText.text = player2GameScore.ToString();
+		}
+		
+		if (player1GameScore >= gamesToWinSet) { StartCoroutine(ShowLoser("player2")); }
+		else if (player2GameScore >= gamesToWinSet) { StartCoroutine(ShowLoser("player1")); }
+	}
+	
+	private IEnumerator ShowLoser(string player) {
+		GameManager.animating = true;
+		
+		loseAnnouncer.renderer.enabled = true;
+		
+		if (player.Equals("player1")) { loseAnnouncer.Play("player1_drink"); }
+		else if (player.Equals("player2")) { loseAnnouncer.Play("player2_drink"); }
+		
+		yield return new WaitForSeconds(3f);
+		loseAnnouncer.renderer.enabled = false;
+		
+		GameManager.animating = false;
+		
+		GameManager.player1.Respawn();
+		GameManager.player2.Respawn();
+		
+		foreach (Ball ball in GameManager.balls) { ball.Respawn(); }
 	}
 }
 

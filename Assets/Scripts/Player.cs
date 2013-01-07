@@ -15,6 +15,8 @@ public class Player : MonoBehaviour {
 	}
 	
 	public virtual void Update () {
+		if (GameManager.animating) { return; }
+		
 		float vertInput = Input.GetAxisRaw(vertKeys);
 		float horzInput = Input.GetAxisRaw(horzKeys);
 		
@@ -24,6 +26,9 @@ public class Player : MonoBehaviour {
 		if (horzInput != 0) {
 			rigidbody.AddRelativeForce(transform.right * Input.GetAxis (horzKeys) * speed * Time.deltaTime);
 		}
+	}
+	
+	public virtual void Die() {
 	}
 	
 	public virtual void Respawn() {
