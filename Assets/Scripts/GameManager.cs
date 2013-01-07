@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
 	public static ArrayList balls;
 	
 	public static bool animating = false;
+	public static bool gameOver = false;
 	
 	void Start() {
 		scoreManager = gameObject.GetComponent<ScoreManager>();
@@ -22,4 +23,11 @@ public class GameManager : MonoBehaviour {
 		balls.Add(GameObject.Find("ball4").GetComponent<Ball>());
 		balls.Add(GameObject.Find("ball5").GetComponent<Ball>());
 	}
+	
+	public void OnGUI() {
+	    if (gameOver && Event.current.type == EventType.KeyDown) {
+			gameOver = false;
+	        Application.LoadLevel("Menu");
+		}
+    }
 }

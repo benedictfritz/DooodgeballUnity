@@ -18,7 +18,16 @@ public class ScoreManager : MonoBehaviour {
 	
 	public OTAnimatingSprite loseAnnouncer;
 	
-	public void Update() {
+	public void Start() {
+		player1GameScore = 0;
+		player1GameScoreText.text = player1GameScore.ToString();
+		player2GameScore = 0;
+		player2GameScoreText.text = player2GameScore.ToString();
+		
+		player1SetScore = 0;
+		player1SetScoreText.text = player1SetScore.ToString();
+		player2SetScore = 0;
+		player2SetScoreText.text = player2SetScore.ToString();
 	}
 	
 	public void IncreaseScore(string player) {
@@ -31,11 +40,25 @@ public class ScoreManager : MonoBehaviour {
 			player2GameScoreText.text = player2GameScore.ToString();
 		}
 		
-		if (player1GameScore >= gamesToWinSet) { StartCoroutine(ShowLoser("player2")); }
-		else if (player2GameScore >= gamesToWinSet) { StartCoroutine(ShowLoser("player1")); }
+		if (player1GameScore >= gamesToWinSet) {
+			if (player1SetScore + 1 == setsToWin) {
+				StartCoroutine(ShowGameOverLoser("player2"));
+			}
+			else {
+				StartCoroutine(ShowGameLoser("player2"));
+			}
+		}
+		else if (player2GameScore >= gamesToWinSet) {
+			if (player2SetScore + 1 == setsToWin) {
+				StartCoroutine(ShowGameOverLoser("player2"));
+			}
+			else {
+				StartCoroutine(ShowGameLoser("player1"));
+			}
+		}
 	}
 	
-	private IEnumerator ShowLoser(string player) {
+	private IEnumerator ShowGameLoser(string player) {
 		GameManager.animating = true;
 		
 		loseAnnouncer.renderer.enabled = true;
@@ -65,6 +88,33 @@ public class ScoreManager : MonoBehaviour {
 		player1GameScoreText.text = player1GameScore.ToString();
 		player2GameScore = 0;
 		player2GameScoreText.text = player2GameScore.ToString();
+	}
+	
+	private IEnumerator ShowGameOverLoser(string player) {
+		GameManager.animating = true;
+		
+		loseAnnouncer.renderer.enabled = true;
+		
+		if (player.Equals("player1")) { loseAnnouncer.Play("player1_loses"); }
+		else if (player.Equals("player2")) { loseAnnouncer.Play("player2_loses"); }
+		
+		if (player2GameScore > player1GameScore) {
+			player2SetScore++;
+			player2SetScoreText.text = player2SetScore.ToString();	
+		}
+		else {
+			player1SetScore++;
+			player1SetScoreText.text = player1SetScore.ToString();
+		}
+		player1GameScore = 0;
+		player1GameScoreText.text = player1GameScore.ToString();
+		player2GameScore = 0;
+		player2GameScoreText.text = player2GameScore.ToString();
+		
+		yield return new WaitForSeconds(3f);
+		
+		GameManager.animating = false;		
+		GameManager.gameOver = true;
 	}
 }
 

@@ -15,7 +15,7 @@ public class Player : MonoBehaviour {
 	}
 	
 	public virtual void Update () {
-		if (GameManager.animating) { return; }
+		if (GameManager.animating || GameManager.gameOver) { return; }
 		
 		float vertInput = Input.GetAxisRaw(vertKeys);
 		float horzInput = Input.GetAxisRaw(horzKeys);
