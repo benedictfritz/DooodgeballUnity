@@ -25,7 +25,7 @@ public class Ball : MonoBehaviour {
 	
 	private void UpdateDeadliness() {
 		float speed = (Mathf.Abs(rigidbody.velocity.x) + Mathf.Abs(rigidbody.velocity.y));
-		deadly = (speed > 10);
+		deadly = (speed > 8);
 	}
 	
 	private void UpdateSprite() {
