@@ -8,12 +8,13 @@ public class ScoreManager : MonoBehaviour {
 	
 	public static int player1GameScore = 0;
 	public static int player2GameScore = 0;
+	public OTTextSprite player1GameScoreText;
+	public OTTextSprite player2GameScoreText;
 	
 	public static int player1SetScore = 0;
 	public static int player2SetScore = 0;
-	
-	public OTTextSprite player1GameScoreText;
-	public OTTextSprite player2GameScoreText;
+	public OTTextSprite player1SetScoreText;
+	public OTTextSprite player2SetScoreText;
 	
 	public OTAnimatingSprite loseAnnouncer;
 	
@@ -49,8 +50,21 @@ public class ScoreManager : MonoBehaviour {
 		
 		GameManager.player1.Respawn();
 		GameManager.player2.Respawn();
-		
 		foreach (Ball ball in GameManager.balls) { ball.Respawn(); }
+		
+		if (player2GameScore > player1GameScore) {
+			player2SetScore++;
+			player2SetScoreText.text = player2SetScore.ToString();	
+		}
+		else {
+			player1SetScore++;
+			player1SetScoreText.text = player1SetScore.ToString();
+		}
+		
+		player1GameScore = 0;
+		player1GameScoreText.text = player1GameScore.ToString();
+		player2GameScore = 0;
+		player2GameScoreText.text = player2GameScore.ToString();
 	}
 }
 
